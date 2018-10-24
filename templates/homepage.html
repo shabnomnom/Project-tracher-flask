@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Project Tracker!</title>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  
+  <h2>List of Students</h2>
+  <ul>
+  	{% for student in students %}
+  	<li> Student Name: {{ student[0] }} {{ student[1] }}, Github Name: <a href="/student?github={{ student[2] }}">{{ student[2] }}</a> </li>
+	{% endfor %}	
+  </ul>
+
+    <h2>List of Projects</h2>
+  <ul>
+    {% for project in projects %}
+    <li> Project Title: <a href="/project?title={{ project[0] }}">{{ project[0] }}</a> </li>
+  {% endfor %}  
+  </ul>
+</body>
+</html>

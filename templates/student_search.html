@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Project Tracker</title>
+</head>
+
+<body>
+
+  <form action="/student" method="GET">
+      <h2>Search for student by Github Name</h2>
+      <label>Enter GitHub username
+          <input type="text" name="github">
+      </label>
+      <input type="submit" value="Display Student">
+  </form>
+
+<!-- Add new student form -->
+  <form action="/add-student" method="POST">
+  	<h2>Add new Student</h2>
+  	<label>Enter First Name
+  		<input type="text" name="firstname">
+  	</label><br>
+  	<label>Enter Last Name
+  		<input type="text" name="lastname">
+  	</label><br>
+  	<label>Enter Github name
+  		<input type="text" name="github">
+  	</label><br>
+  	<input type="submit" value="Add New Student">
+  </form>
+
+</body>
+</html>

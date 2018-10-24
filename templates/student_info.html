@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Student Info</title>
+</head>
+<body>
+  <h1>{{ first }} {{ last }}</h1>
+
+  <p>GitHub Account: {{ github }}</p>
+  
+  <p>List of Projects</p>
+  <ul>
+  	{% for project in projects %}
+  	<!-- for href, it directs to the /project route, which takes the title from the URL with request.args -->
+  	<li> Project Title: <a href="/project?title={{ project[0] }}">{{ project[0] }}</a>, Grade: {{project[1]}} </li>
+	{% endfor %}	
+  </ul>
+</body>
+</html>
