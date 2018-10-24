@@ -43,7 +43,7 @@ def get_all_projects():
 		FROM projects
 	"""
 
-	db_cursor = db.session.execute(QUERY)
+	db_cursor = db.session.execute(QUERY) #SQL response object, 
 
 	projects = db_cursor.fetchall() #list of tuples ( title, description, max_grade )
 
@@ -88,6 +88,20 @@ def make_new_student(first_name, last_name, github):
     print(f"Successfully added student: {first_name} {last_name}")
 
 
+def make_new_project(title,description,max_grade):
+	"""Add a new project with title, description and max_grade"""
+	
+	QUERY ="""
+	INSERT INTO projects (title, description, max_grade)
+	VALUES (:title, :description, :max_grade)
+	"""
+
+	db.session.execute(QUERY, {'title':title, 'description': description, 'max_grade': max_grade})
+	db.session.commit()
+
+	print(f"Project {title} was added with {max_grade} max grade.")
+
+
 def get_project_by_title(title):
     """Given a project title, print information about the project."""
 
@@ -128,18 +142,28 @@ def get_grade_by_github_title(github, title):
 def assign_grade(github, title, grade):
     """Assign a student a grade on an assignment and print a confirmation."""
 
-    QUERY = """
-        INSERT INTO grades (student_github, project_title, grade)
-          VALUES (:github, :title, :grade)
-        """
+    # QUERY = """
+    #     INSERT INTO grades (student_github, project_title, grade)
+    #       VALUES (:github, :title, :grade)
+    #     """
 
-    db_cursor = db.session.execute(QUERY, {'github': github,
-                                           'title': title,
-                                           'grade': grade})
+    # db_cursor = db.session.execute(QUERY, {'github': github,
+    #                                        'title': title,
+    #                                        'grade': grade})
 
-    db.session.commit()
 
-    print(f"Successfully assigned grade of {grade} for {github} in {title}")
+    # db.session.commit()
+
+    TEST_QUERY = """
+    	SELECT student_github
+    	FROM grades
+    	WHERE student_github = 'songcelia' AND project_title = 'Markov'
+    """
+    db_cursor = db.session.execute(TEST_QUERY)
+    rows = db_cursor.fetchone()
+
+    print(rows)
+    # print(f"Successfully assigned grade of {grade} for {github} in {title}")
 
 
 def get_grades_by_github(github):
@@ -227,7 +251,7 @@ def handle_input():
 if __name__ == "__main__":
     connect_to_db(app)
 
-    handle_input()
+    # handle_input()
 
     # To be tidy, we'll close our database connection -- though, since this
     # is where our program ends, we'd quit anyway.

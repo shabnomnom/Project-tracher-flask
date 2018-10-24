@@ -1,11 +1,24 @@
 <!doctype html>
 <html>
 <head>
-    <title>Thanks for adding student</title>
+    <title>
+    {% if item_added == "student" %}
+    	Thanks for adding student
+    {% elif item_added == "project" %}
+    	Thanks for adding project
+    {% endif %}
+	</title>
 </head>
 <body>
-  <h2>Thanks for adding {{ firstname }} {{ lastname }} with github username as {{ github }}</h2>
+	{% if item_added == "student" %}
+	 	<h2>Thanks for adding {{ firstname }} {{ lastname }} with github username as {{ github }}</h2>
 
-  <a href="/student?github={{ github }}">View Info</a>
+		<a href="/student?github={{ github }}">View Info</a>
+	
+	{% elif item_added == "project" %}
+		<h2>Thanks for adding {{ title }} with max grade of {{ max_grade }}</h2>
+
+		<a href="/project?title={{ title }}">View Info</a>
+	{% endif %}
 </body>
 </html>

@@ -17,6 +17,24 @@ def display_homepage():
 	return render_template("homepage.html", students=students, projects=projects)
 
 
+@app.route("/assign-grade", methods=["GET"])
+def display_grade_page():
+	"""Display the form where you can assign grades to all the students"""
+	students = hackbright.get_all_students()
+
+	projects = hackbright.get_all_projects()
+
+	return render_template("assign-grade.html", students=students, projects=projects)
+
+
+@app.route("/submit-grade", methods=["POST"])
+def submit_grade():
+	"""Update or assign a new grade to a project"""
+	student_github = request.form.get("student")
+	project_title = request.form.get("title")
+	project_grade = request.form.get("grade")
+	
+
 @app.route("/student-search")
 def get_student_form():
     """Show form for searching for a student."""
@@ -48,7 +66,7 @@ def add_student():
 
 	hackbright.make_new_student(firstname, lastname, github)
 
-	return render_template("addstudent-thankyou.html", firstname=firstname, lastname=lastname, github=github)
+	return render_template("addstudent-thankyou.html", item_added="student" ,firstname=firstname, lastname=lastname, github=github)
 
 
 @app.route("/project", methods=["GET"])
@@ -65,6 +83,19 @@ def show_project():
 	grades = hackbright.get_grades_by_title(title)
 
 	return render_template("project_info.html", title=title, description=description, max_grade=max_grade, grades=grades)
+
+
+@app.route("/add-project", methods=["POST"])
+def add_project():
+	"""Add a new project to our database"""
+
+	title = request.form.get('title')
+	description = request.form.get('description')
+	max_grade = request.form.get('max-grade')
+
+	hackbright.make_new_project(title, description, max_grade)
+
+	return render_template("addstudent-thankyou.html", item_added="project", title=title, description=description, max_grade=max_grade)
 
 
 if __name__ == "__main__":

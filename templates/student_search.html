@@ -5,6 +5,7 @@
 </head>
 
 <body>
+  <h1>Student Search</h1>
 
   <form action="/student" method="GET">
       <h2>Search for student by Github Name</h2>
@@ -27,6 +28,24 @@
   		<input type="text" name="github">
   	</label><br>
   	<input type="submit" value="Add New Student">
+  </form>
+
+  <!-- Add a new project -->
+  <form action="/add-project" method="POST">
+    <h2>Add new Project</h2>
+    <label>
+      Enter Project Title
+      <input type="text" name="title">
+    </label><br><br>
+    <label>
+      Enter Project Description
+      <textarea name="description" rows="4" cols="50"></textarea>
+    </label><br><br>
+    <label>
+      Enter Max Grade
+      <input type="number" name="max-grade">
+    </label><br>
+    <input type="submit" value="Add New Project">
   </form>
 
 </body>

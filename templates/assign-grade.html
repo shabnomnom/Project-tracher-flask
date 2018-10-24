@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Grade Assignment</title>
+</head>
+
+<body>
+  <h1>Assign a Grade to a Student</h1>
+
+  <form action="/submit-grade" method="POST">
+    Student:
+    <select name="student">
+      {% for student in students %}
+      <option value="{{ student[2] }}">{{ student[0] }} {{ student[1] }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    Project:
+    <select name="project">
+      {% for project in projects %}
+      <option value="{{ project[0] }}">{{ project[0] }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    Grade:
+    <input type="number" name="grade">
+    <br><br>
+    <input type="submit" value="Assign Grade">
+
+  </form>
+
+</body>
+</html>
